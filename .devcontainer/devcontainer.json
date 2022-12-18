@@ -4,11 +4,4 @@
         "ms-python.python",
         "eriklynd.json-tools"
     ]
-    // "customizations": {
-    //     "vscode": {
-    //         "extensions": [
-    //             "eriklynd.json-tools"
-    //         ]
-    //     }
-    // },
 }
