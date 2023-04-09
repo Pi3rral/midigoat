@@ -132,6 +132,8 @@ class Controller:
                 for i in range(0, 6):
                     if self.buttons[i].state == Button.STATE_PRESSED:
                         self.bank.button_pressed(i)
+                    elif self.buttons[i].state == Button.STATE_LONG_PRESSED:
+                        self.bank.button_long_pressed(i)
             self.wait_bounce()
             self.print_menu()
 

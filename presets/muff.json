@@ -26,6 +26,16 @@
         },
         {
             "position": 0,
+            "comment": "Revolt Channel A",
+            "type": "midi",
+            "parameters": {
+                "type": "program_change",
+                "channel": "10",
+                "patch": "0"
+            }
+        },
+        {
+            "position": 0,
             "comment": "Muff On",
             "type": "midi",
             "parameters": {
@@ -33,17 +43,6 @@
                 "channel": "7",
                 "control": "10",
                 "value": "1"
-            }
-        },
-        {
-            "position": 0,
-            "comment": "Sovereign Off",
-            "type": "midi",
-            "parameters": {
-                "type": "control_change",
-                "channel": "8",
-                "control": "10",
-                "value": "0"
             }
         },
         {
@@ -68,12 +67,12 @@
         },
         {
             "position": 0,
-            "comment": "EQ Gen",
+            "comment": "EQ Muff",
             "type": "midi",
             "parameters": {
                 "type": "program_change",
                 "channel": "2",
-                "patch": "1"
+                "patch": "3"
             }
         }
     ]

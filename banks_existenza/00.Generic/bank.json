@@ -9,11 +9,11 @@
         },
         {
             "type": "preset",
-            "name": "panth"
+            "name": "dist"
         },
         {
             "type": "preset",
-            "name": "plumes"
+            "name": "solo-r"
         },
         {
             "type": "preset",
@@ -21,19 +21,11 @@
         },
         {
             "type": "preset",
-            "name": "sovrgn"
-        },
-        {
-            "type": "preset",
-            "name": "solo-p"
+            "name": "phasr"
         },
         {
             "type": "preset",
             "name": "chrus"
-        },
-        {
-            "type": "preset",
-            "name": "phasr"
         }
     ]
 }

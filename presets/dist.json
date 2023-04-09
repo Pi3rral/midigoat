@@ -1,6 +1,6 @@
 {
-    "name": "Clean",
-    "comment": "Clean + Reverb",
+    "name": "Dist",
+    "comment": "Dist + Reverb",
     "actions": [
         {
             "position": 0,
@@ -26,12 +26,12 @@
         },
         {
             "position": 0,
-            "comment": "Revolt Channel A",
+            "comment": "Revolt Channel B",
             "type": "midi",
             "parameters": {
                 "type": "program_change",
                 "channel": "10",
-                "patch": "0"
+                "patch": "2"
             }
         },
         {

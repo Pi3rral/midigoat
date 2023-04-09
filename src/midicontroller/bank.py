@@ -161,6 +161,11 @@ class Bank:
             button_number + (self.current_page * self.NB_PHYSICAL_BUTTONS)
         ].pressed()
 
+    def button_long_pressed(self, button_number):
+        self.presets[
+            button_number + (self.current_page * self.NB_PHYSICAL_BUTTONS)
+        ].long_pressed()
+
     def get_current_bank_name(self):
         return self.name
 
