@@ -1,6 +1,6 @@
 {
-    "name": "Solo-C",
-    "comment": "Revolt Channel C + EQ Solo",
+    "name": "SoloCh",
+    "comment": "ReVolt Channel C + Chorus + EQ Solo",
     "actions": [
         {
             "position": 0,
@@ -68,12 +68,12 @@
         },
         {
             "position": 0,
-            "comment": "Terraform Off",
+            "comment": "Terraform Chorus",
             "type": "midi",
             "parameters": {
                 "type": "program_change",
                 "channel": "1",
-                "patch": "9"
+                "patch": "5"
             }
         },
         {

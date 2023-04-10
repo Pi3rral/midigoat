@@ -1,27 +1,37 @@
 {
-    "name": "SoloCh",
-    "comment": "Plumes + Pantheon + Chorus + EQ Solo",
+    "name": "Crnch",
+    "comment": "Crunch + Reverb",
     "actions": [
         {
             "position": 0,
-            "comment": "Plumes On",
+            "comment": "Plumes Off",
             "type": "midi",
             "parameters": {
                 "type": "control_change",
                 "channel": "6",
                 "control": "10",
-                "value": "1"
+                "value": "0"
             }
         },
         {
             "position": 0,
-            "comment": "Pantheon On",
+            "comment": "Pantheon Off",
             "type": "midi",
             "parameters": {
                 "type": "control_change",
                 "channel": "5",
                 "control": "10",
-                "value": "1"
+                "value": "0"
+            }
+        },
+        {
+            "position": 0,
+            "comment": "Revolt Channel B",
+            "type": "midi",
+            "parameters": {
+                "type": "program_change",
+                "channel": "10",
+                "patch": "2"
             }
         },
         {
@@ -31,17 +41,6 @@
             "parameters": {
                 "type": "control_change",
                 "channel": "7",
-                "control": "10",
-                "value": "0"
-            }
-        },
-        {
-            "position": 0,
-            "comment": "Sovereign Off",
-            "type": "midi",
-            "parameters": {
-                "type": "control_change",
-                "channel": "8",
                 "control": "10",
                 "value": "0"
             }
@@ -58,22 +57,22 @@
         },
         {
             "position": 0,
-            "comment": "Terraform Chorus",
+            "comment": "Terraform Off",
             "type": "midi",
             "parameters": {
                 "type": "program_change",
                 "channel": "1",
-                "patch": "5"
+                "patch": "9"
             }
         },
         {
             "position": 0,
-            "comment": "EQ Solo",
+            "comment": "EQ Gen",
             "type": "midi",
             "parameters": {
                 "type": "program_change",
                 "channel": "2",
-                "patch": "2"
+                "patch": "1"
             }
         }
     ]

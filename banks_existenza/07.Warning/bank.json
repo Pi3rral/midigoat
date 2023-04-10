@@ -9,7 +9,7 @@
         },
         {
             "type": "preset",
-            "name": "panth"
+            "name": "crunch"
         },
         {
             "type": "preset",
@@ -21,11 +21,11 @@
         },
         {
             "type": "preset",
-            "name": "sovrgn"
+            "name": "dist"
         },
         {
             "type": "preset",
-            "name": "solo-p"
+            "name": "solo-r"
         }
     ]
 }

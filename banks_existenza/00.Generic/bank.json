@@ -9,15 +9,23 @@
         },
         {
             "type": "preset",
+            "name": "crunch"
+        },
+        {
+            "type": "preset",
             "name": "dist"
         },
         {
             "type": "preset",
-            "name": "solo-r"
+            "name": "muff"
         },
         {
             "type": "preset",
-            "name": "muff"
+            "name": "plumes"
+        },
+        {
+            "type": "preset",
+            "name": "solo-r"
         },
         {
             "type": "preset",

@@ -13,19 +13,19 @@
         },
         {
             "type": "preset",
-            "name": "lead-p"
-        },
-        {
-            "type": "preset",
             "name": "cl-pha"
         },
         {
             "type": "preset",
-            "name": "panth"
+            "name": "dist"
         },
         {
             "type": "preset",
-            "name": "solo-p"
+            "name": "crunch"
+        },
+        {
+            "type": "preset",
+            "name": "solo-r"
         }
     ]
 }

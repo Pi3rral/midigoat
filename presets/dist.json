@@ -26,12 +26,12 @@
         },
         {
             "position": 0,
-            "comment": "Revolt Channel B",
+            "comment": "Revolt Channel C",
             "type": "midi",
             "parameters": {
                 "type": "program_change",
                 "channel": "10",
-                "patch": "2"
+                "patch": "4"
             }
         },
         {

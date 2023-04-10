@@ -13,19 +13,7 @@
         },
         {
             "type": "preset",
-            "name": "muff-plu"
-        },
-        {
-            "type": "preset",
-            "name": "muff-plu-pha"
-        },
-        {
-            "type": "preset",
-            "name": "sovrgn"
-        },
-        {
-            "type": "preset",
-            "name": "solo-p"
+            "name": "muff-pha"
         }
     ]
 }

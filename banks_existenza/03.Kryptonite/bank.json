@@ -5,27 +5,23 @@
     "presets": [
         {
             "type": "preset",
-            "name": "clean"
-        },
-        {
-            "type": "preset",
             "name": "cl-pha"
         },
         {
             "type": "preset",
-            "name": "lead-p"
+            "name": "dist"
         },
         {
             "type": "preset",
-            "name": "panth"
+            "name": "solo-r"
         },
         {
             "type": "preset",
-            "name": "sovrgn"
+            "name": "clean"
         },
         {
             "type": "preset",
-            "name": "solo-p"
+            "name": "crunch"
         }
     ]
 }
