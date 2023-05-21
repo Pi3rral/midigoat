@@ -12,7 +12,6 @@ PULSE_WIDTH_USEC = 5
 
 
 class ESPController(Controller):
-
     pin_scl = 22
     pin_sda = 21
     pin_pl = 14
@@ -25,6 +24,7 @@ class ESPController(Controller):
     lcd_address = 0x3F
 
     def __init__(self):
+        super().__init__()
         # init pins
         self.pl_pin = Pin(self.pin_pl, Pin.OUT)
         self.clk_pin = Pin(self.pin_clk, Pin.OUT)

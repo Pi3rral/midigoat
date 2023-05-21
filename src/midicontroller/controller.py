@@ -7,9 +7,8 @@ FS3X_RING_IDX = 6
 
 
 class Button:
-
-    LONG_PRESS_MS = 700
-    LONG_PRESS_REPEAT_MS = 500
+    LONG_PRESS_MS = 1000
+    LONG_PRESS_REPEAT_MS = 700
 
     INTERNAL_STATE_ON = 1
     INTERNAL_STATE_OFF = 0
@@ -52,7 +51,6 @@ class Button:
 
 
 class Controller:
-
     bank = None
     lcd = None
     button_values = []

@@ -1,5 +1,5 @@
 {
-    "image": "micropython/unix:v1.19.1",
+    "image": "midigoat",
     "extensions": [
         "ms-python.python",
         "eriklynd.json-tools"
