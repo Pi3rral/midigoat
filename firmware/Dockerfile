@@ -21,13 +21,22 @@ RUN git clone -b ${MICROPYTHON_VERSION} https://github.com/micropython/micropyth
 
 WORKDIR ${MICROPYTHON_DIR}
 
-RUN source tools/ci.sh && ci_esp32_idf44_setup
+ENV MICROPYTHON_DIR=${MICROPYTHON_DIR}
+
+# RUN source tools/ci.sh && ci_esp32_idf44_setup
 # build vanilla first to re-use docker layer
-RUN source tools/ci.sh && ci_esp32_build
+COPY firmware/setup.sh ${MICROPYTHON_DIR}/setup.sh
+RUN ./setup.sh
+
+# RUN source tools/ci.sh && ci_esp32_build
 
 COPY src/midicontroller/ ${MICROPYTHON_DIR}/ports/esp32/modules/midicontroller/
 COPY src/wifi.py ${MICROPYTHON_DIR}/ports/esp32/modules/wifi.py
 COPY src/main.py ${MICROPYTHON_DIR}/ports/esp32/modules/boot.py
+COPY firmware/inisetup.py ${MICROPYTHON_DIR}/ports/esp32/modules/inisetup.py
+COPY firmware/manifest.py ${MICROPYTHON_DIR}/ports/esp32/boards/manifest_midigoat.py
+COPY firmware/build.sh ${MICROPYTHON_DIR}/midigoat_build.sh
 
 # build with custom code
-RUN source tools/ci.sh && ci_esp32_build
+# RUN source tools/ci.sh && ci_esp32_build
+RUN ./midigoat_build.sh

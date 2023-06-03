@@ -21,8 +21,8 @@ Erase and flash on ESP32 (option to erase at the same time is not working)
 WARNING: Using more recent firmware (or custom) is not working yet
 
 ```shell
-python -m esptool --port /dev/tty.usbserial-0001 erase_flash
-python -m esptool --port /dev/tty.usbserial-0001 --chip esp32 --baud 460800 write_flash -z 0x1000 firmware/esp32-20210902-v1.17.bin
+esptool.py --port /dev/tty.usbserial-0001 erase_flash
+esptool.py --port /dev/tty.usbserial-0001 --chip esp32 --baud 460800 write_flash -z 0x1000 firmware/esp32-20210902-v1.20.0.bin
 ```
 
 #### Build Firmware
@@ -32,6 +32,11 @@ Building in docker image:
 ```shell
 docker build -f firmware/Dockerfile -t midigoat .
 docker run --rm -ti --volume $PWD/firmware:/root/export midigoat /bin/bash -c "cp /micropython/ports/esp32/build-GENERIC/firmware.bin /root/export/esp32-generic-midigoat.bin"
+```
+
+Copy build directory locally
+```shell
+docker run --rm -ti --volume $PWD/build:/root/export midigoat /bin/bash -c "cp -R /micropython/ports/esp32/build-GENERIC_OTA /root/export/GENERIC_OTA"
 ```
 
 Firmware is located in the image at `/micropython/ports/esp32/build-GENERIC/firmware.bin`
@@ -61,6 +66,9 @@ or from the rshell
 
 ```
 rsync presets /pyboard/presets
+mkdir /pyboard/banks
+rsync banks_existenza/00.Generic /pyboard/banks/generic
+rsync banks_existenza/00.Generic /pyboard/banks/generic
 rsync banks_existenza /pyboard/banks
 rsync src/midicontroller /pyboard/midicontroller
 cp src/wifi.py /pyboard/
@@ -117,3 +125,14 @@ https://github.com/adafruit/Adafruit_CircuitPython_MIDI
 - added `__str__` to `MIDIMessage`, `ProgramChange` and `ControlChange` classes
 
 https://github.com/dhylands/python_lcd
+
+
+# Ideas
+
+Long press open a setup menu:
+1. Connect Home Wifi
+2. Create own Wifi
+3. Start/Stop Web Server
+4. Start/Stop Bluetooth
+5. Start REPL (AsyncIO)
+6. Quit setup menu

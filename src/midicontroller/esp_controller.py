@@ -20,8 +20,8 @@ class ESPController(Controller):
 
     # WARNING! 0x27 is the breadbord address
     # actual pedal is 0x3F
-    # lcd_address = 0x27
-    lcd_address = 0x3F
+    lcd_address = 0x27
+    # lcd_address = 0x3F
 
     def __init__(self):
         super().__init__()

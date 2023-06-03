@@ -5,6 +5,10 @@ from .bank import Bank
 FS3X_TIP_IDX = 7
 FS3X_RING_IDX = 6
 
+NO_COMMAND = 0
+START_WEBSERVER_COMMAND = 1
+START_REPL_COMMAND = 2
+
 
 class Button:
     LONG_PRESS_MS = 1000
@@ -16,6 +20,7 @@ class Button:
     STATE_OFF = 0
     STATE_PRESSED = 1
     STATE_LONG_PRESSED = 2
+    STATE_RELEASED = 3
 
     def __init__(self):
         self.state = self.STATE_OFF
@@ -114,18 +119,23 @@ class Controller:
         self.print_menu()
 
     def loop(self):
+        command = NO_COMMAND
         if self.read_buttons():
             if self.buttons[FS3X_TIP_IDX].state == Button.STATE_PRESSED:
                 if self.buttons[FS3X_RING_IDX].state == Button.STATE_PRESSED:
-                    self.bank.swap_page()
-                else:
                     self.bank.bank_up()
+                else:
+                    self.bank.swap_page()
             elif self.buttons[FS3X_RING_IDX].state == Button.STATE_PRESSED:
                 self.bank.bank_down()
             elif self.buttons[0].state == Button.STATE_LONG_PRESSED:
                 self.bank.bank_down()
             elif self.buttons[2].state == Button.STATE_LONG_PRESSED:
                 self.bank.bank_up()
+            elif self.buttons[3].state == Button.STATE_LONG_PRESSED:
+                command = START_REPL_COMMAND
+            elif self.buttons[5].state == Button.STATE_LONG_PRESSED:
+                command = START_WEBSERVER_COMMAND
             else:
                 for i in range(0, 6):
                     if self.buttons[i].state == Button.STATE_PRESSED:
@@ -134,6 +144,7 @@ class Controller:
                         self.bank.button_long_pressed(i)
             self.wait_bounce()
             self.print_menu()
+        return command
 
     def bank_up(self):
         self.bank.bank_up()

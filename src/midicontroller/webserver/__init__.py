@@ -31,7 +31,7 @@ async def bank_up(request):
     return "Bank Down!"
 
 
-@web.route("/bank_info/<int:bank_number>")
+@web.route("/bank/<int:bank_number>", methods=["GET"])
 async def get_bank_info(request, bank_number):
     try:
         return Response(
@@ -41,11 +41,35 @@ async def get_bank_info(request, bank_number):
         return Response(body=str(e), status_code=404)
 
 
-@web.route("/preset_info/<string:preset_name>")
+@web.route("/bank/<int:bank_number>", methods=["POST"])
+async def set_bank(request, bank_number):
+    try:
+        bank_data = request.json
+        return Response(
+            body=midi_controller.bank.update_bank(bank_number, bank_data),
+            status_code=200,
+        )
+    except Exception as e:
+        return Response(body=str(e), status_code=404)
+
+
+@web.route("/preset/<string:preset_name>", methods=["GET"])
 async def get_preset_info(request, preset_name):
     try:
         return Response(
             body=midi_controller.bank.get_preset_info(preset_name),
+            status_code=200,
+        )
+    except Exception as e:
+        return Response(body=str(e), status_code=404)
+
+
+@web.route("/preset/<string:preset_name>", methods=["POST"])
+async def set_preset(request, preset_name):
+    try:
+        preset_data = request.json
+        return Response(
+            body=midi_controller.bank.update_preset(preset_name, preset_data),
             status_code=200,
         )
     except Exception as e:

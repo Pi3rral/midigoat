@@ -11,7 +11,6 @@ from .preset import Preset
 
 
 class Bank:
-
     DEFAULT_BANKS_DIRECTORY = "/banks"
     DEFAULT_PRESETS_DIRECTORY = "/presets"
     VERSION_V1 = "v1"
@@ -33,8 +32,12 @@ class Bank:
         self.name = None
         self.banks_directory = banks_directory or self.DEFAULT_BANKS_DIRECTORY
         self.presets_directory = presets_directory or self.DEFAULT_PRESETS_DIRECTORY
-        self.set_banks()
-        self.load_bank()
+        try:
+            self.set_banks()
+            self.load_bank()
+        except Exception as e:
+            pass
+            # self.load_error = str(e)
 
     def set_banks(self):
         self.banks = sorted(uos.listdir(self.banks_directory))
@@ -44,6 +47,8 @@ class Bank:
         self.current_page = (self.current_page + 1) % self.NB_PAGES
 
     def bank_up(self):
+        if not self.is_loaded:
+            return
         self.presets = []
         gc.collect()
         self.current_bank += 1
@@ -52,6 +57,8 @@ class Bank:
         self.load_bank()
 
     def bank_down(self):
+        if not self.is_loaded:
+            return
         self.presets = []
         gc.collect()
         self.current_bank -= 1
@@ -130,10 +137,21 @@ class Bank:
         bank_data["nb_preset"] = len(uos.listdir(bank_dir)) - 1
         return bank_data
 
+    def update_bank(self, bank_number, bank_data):
+        bank_dir = self.banks_directory + "/" + self.banks[bank_number - 1]
+        with open(bank_dir + "/bank.json", "w") as fp:
+            ujson.dump(bank_data, fp)
+        return "Bank {} updated".format(bank_number)
+
     def get_preset_info(self, preset_name):
         with open(self.presets_directory + "/" + preset_name + ".json") as fp:
             preset_data = ujson.load(fp)
         return preset_data
+
+    def update_preset(self, preset_name, preset_data):
+        with open(self.presets_directory + "/" + preset_name + ".json") as fp:
+            ujson.dump(preset_data, fp)
+        return "Preset {} updated".format(preset_name)
 
     def load_bank_v1_file(self):
         bank_file = self.banks_directory + "/bank_" + str(self.current_bank) + ".json"
@@ -157,16 +175,22 @@ class Bank:
         gc.collect()
 
     def button_pressed(self, button_number):
+        if not self.is_loaded:
+            return
         self.presets[
             button_number + (self.current_page * self.NB_PHYSICAL_BUTTONS)
         ].pressed()
 
     def button_long_pressed(self, button_number):
+        if not self.is_loaded:
+            return
         self.presets[
             button_number + (self.current_page * self.NB_PHYSICAL_BUTTONS)
         ].long_pressed()
 
     def get_current_bank_name(self):
+        if not self.is_loaded:
+            return "No Banks Loaded"
         return self.name
 
     def get_current_page(self):
