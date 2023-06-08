@@ -23,20 +23,32 @@ WORKDIR ${MICROPYTHON_DIR}
 
 ENV MICROPYTHON_DIR=${MICROPYTHON_DIR}
 
-# RUN source tools/ci.sh && ci_esp32_idf44_setup
-# build vanilla first to re-use docker layer
 COPY firmware/setup.sh ${MICROPYTHON_DIR}/setup.sh
 RUN ./setup.sh
 
-# RUN source tools/ci.sh && ci_esp32_build
+# Copy libraries to be added to the firmware
+## Microdot
+COPY libs/microdot/src/microdot.py ${MICROPYTHON_DIR}/ports/esp32/modules/microdot/microdot.py
+COPY libs/microdot/src/microdot_asyncio.py ${MICROPYTHON_DIR}/ports/esp32/modules/microdot/microdot_asyncio.py
+## Adafruit MIDI
+COPY libs/Adafruit_CircuitPython_MIDI/adafruit_midi ${MICROPYTHON_DIR}/ports/esp32/modules/adafruit_midi
+## LCD library
+COPY libs/lcd ${MICROPYTHON_DIR}/ports/esp32/modules/lcd
 
+# Copy manifest and inisetup for "blank" build
+COPY firmware/manifest.py ${MICROPYTHON_DIR}/ports/esp32/boards/manifest_midigoat.py
+COPY firmware/inisetup.py ${MICROPYTHON_DIR}/ports/esp32/modules/inisetup.py
+
+# build vanilla first to re-use docker layer
+# RUN source tools/ci.sh && ci_esp32_idf44_setup
+COPY firmware/build.sh ${MICROPYTHON_DIR}/midigoat_build.sh
+
+RUN ./midigoat_build.sh
+
+# RUN source tools/ci.sh && ci_esp32_build
 COPY src/midicontroller/ ${MICROPYTHON_DIR}/ports/esp32/modules/midicontroller/
 COPY src/wifi.py ${MICROPYTHON_DIR}/ports/esp32/modules/wifi.py
 COPY src/main.py ${MICROPYTHON_DIR}/ports/esp32/modules/boot.py
-COPY firmware/inisetup.py ${MICROPYTHON_DIR}/ports/esp32/modules/inisetup.py
-COPY firmware/manifest.py ${MICROPYTHON_DIR}/ports/esp32/boards/manifest_midigoat.py
-COPY firmware/build.sh ${MICROPYTHON_DIR}/midigoat_build.sh
 
 # build with custom code
-# RUN source tools/ci.sh && ci_esp32_build
 RUN ./midigoat_build.sh

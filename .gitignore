@@ -3,3 +3,5 @@
 .DS_Store
 .vscode
 build
+libs/microdot
+libs/Adafruit_CircuitPython_MIDI

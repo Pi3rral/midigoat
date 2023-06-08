@@ -15,6 +15,14 @@ Using pyenv-virtualenv `micropython`: `pyenv virtualenv activate micropython`
 pip install -r requirements.txt
 ```
 
+### External Libraries
+
+In `libs` directory, clone the following repos:
+- git@github.com:miguelgrinberg/microdot.git
+- git@github.com:adafruit/Adafruit_CircuitPython_MIDI.git
+
+They will be added to the frozen part of the custom firmware.
+
 ### Flash firmware
 
 Erase and flash on ESP32 (option to erase at the same time is not working)
@@ -23,6 +31,13 @@ WARNING: Using more recent firmware (or custom) is not working yet
 ```shell
 esptool.py --port /dev/tty.usbserial-0001 erase_flash
 esptool.py --port /dev/tty.usbserial-0001 --chip esp32 --baud 460800 write_flash -z 0x1000 firmware/esp32-20210902-v1.20.0.bin
+```
+
+Flash only the `micropython` firmware (keep `boot` and `data`)
+Example using OTA firmware in `ota_0` partition
+
+```shell
+esptool.py --port /dev/tty.usbserial-0001 --chip esp32 --baud 460800 write_flash -z 0x10000 build/GENERIC_OTA/micropython.bin
 ```
 
 #### Build Firmware
@@ -97,6 +112,14 @@ repl
 ```
 exit with `Ctrl-X`
 
+#### Using `mpremote` with `aiorepl`
+
+```
+mpremote connect /dev/tty.usbserial-0001
+```
+
+Then start `aiorepl` prompt (Long press button 4)
+
 #### Free Flash Space
 
 From REPL
@@ -136,3 +159,13 @@ Long press open a setup menu:
 4. Start/Stop Bluetooth
 5. Start REPL (AsyncIO)
 6. Quit setup menu
+
+# TODO
+
+- Create manifest files for frozen code: https://docs.micropython.org/en/latest/reference/manifest.html#high-level-functions
+- Implement OTA firmware update: 
+    - https://docs.micropython.org/en/latest/library/esp32.html
+    - https://github.com/orgs/micropython/discussions/9579
+- Freeze static files:
+    - https://github.com/peterhinch/micropython_data_to_py
+    - https://github.com/insighio/microfreezer
