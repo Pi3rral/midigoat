@@ -9,6 +9,8 @@ except:
 import gc
 from .preset import Preset
 
+from .action import Action, BankAction
+
 
 class Bank:
     DEFAULT_BANKS_DIRECTORY = "/banks"
@@ -153,33 +155,13 @@ class Bank:
             ujson.dump(preset_data, fp)
         return "Preset {} updated".format(preset_name)
 
-    def load_bank_v1_file(self):
-        bank_file = self.banks_directory + "/bank_" + str(self.current_bank) + ".json"
-        try:
-            with open(bank_file) as fp:
-                bank_data = ujson.load(fp)
-            self.name = bank_data.get("name")
-            self.current_page = 0
-            self.presets = []
-            for preset in bank_data.get("presets"):
-                self.presets.append(Preset(preset.get("name"), preset.get("actions")))
-            for _ in range(len(self.presets), self.NB_PAGES * self.NB_PHYSICAL_BUTTONS):
-                self.presets.append(Preset("NONE", []))
-            self.presets_name = [preset.get_name() for preset in self.presets]
-            self.is_loaded = True
-            self.load_error = ""
-        except Exception as e:
-            self.is_loaded = False
-            self.load_error = e.__class__.__name__
-            print(e)
-        gc.collect()
-
     def button_pressed(self, button_number):
         if not self.is_loaded:
             return
         self.presets[
             button_number + (self.current_page * self.NB_PHYSICAL_BUTTONS)
         ].pressed()
+        self.do_bank_action()
 
     def button_long_pressed(self, button_number):
         if not self.is_loaded:
@@ -187,6 +169,17 @@ class Bank:
         self.presets[
             button_number + (self.current_page * self.NB_PHYSICAL_BUTTONS)
         ].long_pressed()
+        self.do_bank_action()
+
+    def do_bank_action(self):
+        bank_action = Action.get_bank_action()
+        if bank_action == BankAction.NEXT:
+            self.bank_up()
+        elif bank_action == BankAction.PREVIOUS:
+            self.bank_down()
+        elif bank_action == BankAction.TOGGLE_PAGE:
+            self.swap_page()
+        Action.clear_bank_action()
 
     def get_current_bank_name(self):
         if not self.is_loaded:

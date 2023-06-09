@@ -17,11 +17,11 @@
         },
         {
             "type": "preset",
-            "name": "muff"
+            "name": "toggle"
         },
         {
             "type": "preset",
-            "name": "plumes"
+            "name": "muff"
         },
         {
             "type": "preset",
@@ -34,6 +34,22 @@
         {
             "type": "preset",
             "name": "chrus"
+        },
+        {
+            "type": "preset",
+            "name": "trem"
+        },
+        {
+            "type": "preset",
+            "name": "toggle"
+        },
+        {
+            "type": "preset",
+            "name": "tf-off"
+        },
+        {
+            "type": "preset",
+            "name": "delay"
         }
     ]
 }

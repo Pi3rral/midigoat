@@ -1,0 +1,17 @@
+{
+    "name": "Delay",
+    "comment": "Toggle Delay",
+    "actions": [
+        {
+            "position": 0,
+            "comment": "Delay",
+            "type": "midi",
+            "parameters": {
+                "type": "control_change",
+                "channel": "4",
+                "control": "102",
+                "value": "127"
+            }
+        }
+    ]
+}

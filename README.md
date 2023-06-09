@@ -80,11 +80,11 @@ ampy --port /dev/tty.usbserial-0001 put src/main.py /main.py
 or from the rshell
 
 ```
-rsync presets /pyboard/presets
+rsync data/presets /pyboard/presets
 mkdir /pyboard/banks
-rsync banks_existenza/00.Generic /pyboard/banks/generic
-rsync banks_existenza/00.Generic /pyboard/banks/generic
-rsync banks_existenza /pyboard/banks
+rsync data/banks_existenza/00.Generic /pyboard/banks/generic
+rsync data/banks_existenza/00.Generic /pyboard/banks/generic
+rsync data/banks_existenza /pyboard/banks
 rsync src/midicontroller /pyboard/midicontroller
 cp src/wifi.py /pyboard/
 cp src/main.py /pyboard/

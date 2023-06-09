@@ -1,5 +1,5 @@
-from .midi.adafruit_midi.program_change import ProgramChange
-from .midi.adafruit_midi.control_change import ControlChange
+from adafruit_midi.program_change import ProgramChange
+from adafruit_midi.control_change import ControlChange
 from .midi import MidiPort
 
 
@@ -20,7 +20,6 @@ class MIDIMessage:
 
 
 class Action:
-
     type = None
     parameters = {}
 

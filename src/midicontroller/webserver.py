@@ -1,4 +1,4 @@
-from .microdot_asyncio import Microdot, Response
+from microdot.microdot_asyncio import Microdot, Response
 
 try:
     from midicontroller.esp_controller_asyncio import midi_controller

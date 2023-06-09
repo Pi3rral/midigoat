@@ -2,9 +2,9 @@ from utime import sleep_us, sleep_ms
 from machine import Pin, SoftI2C
 from .controller import Controller
 from .bank import Bank
-from .lcd.esp8266_i2c_lcd import I2cLcd
+from lcd.esp8266_i2c_lcd import I2cLcd
 from .midi.ports import ESP32TXPort
-from .midi.adafruit_midi import MIDI
+from adafruit_midi import MIDI
 from .midi import MidiPort
 
 

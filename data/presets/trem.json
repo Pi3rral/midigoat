@@ -1,0 +1,16 @@
+{
+    "comment": "Tremolo",
+    "name": "Trem",
+    "actions": [
+        {
+            "position": 0,
+            "comment": "Terraform Tremolo",
+            "type": "midi",
+            "parameters": {
+                "type": "program_change",
+                "channel": "1",
+                "patch": "6"
+            }
+        }
+    ]
+}

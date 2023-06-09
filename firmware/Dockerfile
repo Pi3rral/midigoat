@@ -28,8 +28,7 @@ RUN ./setup.sh
 
 # Copy libraries to be added to the firmware
 ## Microdot
-COPY libs/microdot/src/microdot.py ${MICROPYTHON_DIR}/ports/esp32/modules/microdot/microdot.py
-COPY libs/microdot/src/microdot_asyncio.py ${MICROPYTHON_DIR}/ports/esp32/modules/microdot/microdot_asyncio.py
+COPY libs/microdot ${MICROPYTHON_DIR}/ports/esp32/modules/microdot
 ## Adafruit MIDI
 COPY libs/Adafruit_CircuitPython_MIDI/adafruit_midi ${MICROPYTHON_DIR}/ports/esp32/modules/adafruit_midi
 ## LCD library
@@ -45,10 +44,10 @@ COPY firmware/build.sh ${MICROPYTHON_DIR}/midigoat_build.sh
 
 RUN ./midigoat_build.sh
 
-# RUN source tools/ci.sh && ci_esp32_build
-COPY src/midicontroller/ ${MICROPYTHON_DIR}/ports/esp32/modules/midicontroller/
+# Copy midicontroller application
 COPY src/wifi.py ${MICROPYTHON_DIR}/ports/esp32/modules/wifi.py
-COPY src/main.py ${MICROPYTHON_DIR}/ports/esp32/modules/boot.py
+COPY src/midicontroller/ ${MICROPYTHON_DIR}/ports/esp32/modules/midicontroller/
+# COPY src/main.py ${MICROPYTHON_DIR}/ports/esp32/modules/boot.py
 
 # build with custom code
 RUN ./midigoat_build.sh

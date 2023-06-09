@@ -1,0 +1,14 @@
+{
+    "name": "Toggle",
+    "comment": "Bank Toggle Page",
+    "actions": [
+        {
+            "position": 0,
+            "comment": "Toggle Bank Page",
+            "type": "bank",
+            "parameters": {
+                "bank_action": "toggle_page"
+            }
+        }
+    ]
+}
