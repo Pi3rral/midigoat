@@ -3,7 +3,7 @@ from machine import Pin, SoftI2C
 from .controller import Controller
 from .bank import Bank
 from lcd.esp8266_i2c_lcd import I2cLcd
-from .midi.ports import ESP32TXPort
+from .esp32_midi import ESP32TXPort
 from adafruit_midi import MIDI
 from .midi import MidiPort
 

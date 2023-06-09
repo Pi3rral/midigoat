@@ -37,7 +37,6 @@ async def midicontroller():
 
 
 async def webserver():
-    pass
     await web.start_server(debug=True)
 
 
@@ -47,5 +46,3 @@ async def main():
 
     print("Start Infinite Loop")
     event_loop.run_forever()
-    # while True:
-    #     await asyncio.sleep(10)
