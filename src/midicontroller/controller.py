@@ -64,6 +64,9 @@ class Controller:
 
     def __init__(self):
         self.bank = Bank()
+        self.init_buttons()
+
+    def init_buttons(self):
         for _ in range(self.nb_buttons):
             self.button_values.append(0)
             self.buttons.append(Button())
@@ -115,7 +118,7 @@ class Controller:
         self.lcd.clear()
         self.lcd.move_to(0, 0)
         self.lcd.putstr(message)
-        self.wait(seconds)
+        sleep(seconds)
         self.print_menu()
 
     def loop(self):

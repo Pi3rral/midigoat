@@ -1,4 +1,4 @@
-import wifi
+import midicontroller.wifi as wifi
 from midicontroller.midi import MidiPort
 from midicontroller.midi.adafruit_midi import MIDI
 from midicontroller.esp32_midi import ESP32TXPort

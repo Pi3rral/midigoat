@@ -1,3 +1,4 @@
+import ujson as json
 from utime import sleep_us, sleep_ms
 from machine import Pin, SoftI2C
 from .controller import Controller
@@ -9,42 +10,55 @@ from .midi import MidiPort
 
 
 PULSE_WIDTH_USEC = 5
+DEFAULT_CONFIG_FILE = "/controller.json"
+DEFAULT_LCD_ADDRESS = 0x3F
+LCD_ROWS = 4
+LCD_COLS = 20
+
+PIN_SCL = 22
+PIN_SDA = 21
+PIN_PL = 14
+PIN_CLK = 12
+PIN_DATA = 13
 
 
 class ESPController(Controller):
-    pin_scl = 22
-    pin_sda = 21
-    pin_pl = 14
-    pin_clk = 12
-    pin_data = 13
-
-    # WARNING! 0x27 is the breadbord address
-    # actual pedal is 0x3F
-    lcd_address = 0x27
-    # lcd_address = 0x3F
-
     def __init__(self):
-        super().__init__()
+        # init config
+        self.read_config()
+        # init buttons
+        self.init_buttons()
         # init pins
-        self.pl_pin = Pin(self.pin_pl, Pin.OUT)
-        self.clk_pin = Pin(self.pin_clk, Pin.OUT)
-        self.data_pin = Pin(self.pin_data, Pin.IN)
+        self.pl_pin = Pin(PIN_PL, Pin.OUT)
+        self.clk_pin = Pin(PIN_CLK, Pin.OUT)
+        self.data_pin = Pin(PIN_DATA, Pin.IN)
         self.clk_pin.value(0)
-
         # init midi
         midi_port = ESP32TXPort(enable_tx0=False, enable_tx1=False, enable_tx2=True)
         midi = MIDI(midi_out=midi_port)
         MidiPort.midi_object = midi
-
         # init bank and LCD
-        self.bank = Bank()
+        self.bank = Bank(
+            banks_directory=self.config.get("banks_directory"),
+            presets_directory=self.config.get("presets_directory"),
+        )
+        # WARNING! 0x27 is the breadbord address
+        # actual pedal is 0x3F
+        self.lcd_address = self.config.get("lcd_address", DEFAULT_LCD_ADDRESS)
         self.lcd = I2cLcd(
-            SoftI2C(scl=Pin(self.pin_scl), sda=Pin(self.pin_sda)),
+            SoftI2C(scl=Pin(PIN_SCL), sda=Pin(PIN_SDA)),
             self.lcd_address,
-            4,
-            20,
+            LCD_ROWS,
+            LCD_COLS,
         )
         self.print_menu()
+
+    def read_config(self):
+        try:
+            with open(DEFAULT_CONFIG_FILE) as fp:
+                self.config = json.load(fp)
+        except Exception:
+            print("Error reading config file")
 
     def read_buttons(self):
         self.pl_pin.value(0)

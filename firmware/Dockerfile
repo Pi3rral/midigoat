@@ -45,7 +45,6 @@ COPY firmware/build.sh ${MICROPYTHON_DIR}/midigoat_build.sh
 RUN ./midigoat_build.sh
 
 # Copy midicontroller application
-COPY src/wifi.py ${MICROPYTHON_DIR}/ports/esp32/modules/wifi.py
 COPY src/midicontroller/ ${MICROPYTHON_DIR}/ports/esp32/modules/midicontroller/
 # COPY src/main.py ${MICROPYTHON_DIR}/ports/esp32/modules/boot.py
 

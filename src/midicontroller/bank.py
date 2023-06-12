@@ -11,17 +11,22 @@ from .preset import Preset
 
 from .action import Action, BankAction
 
+DEFAULT_BANKS_DIRECTORY = "/banks"
+DEFAULT_PRESETS_DIRECTORY = "/presets"
+
 
 class Bank:
-    DEFAULT_BANKS_DIRECTORY = "/banks"
-    DEFAULT_PRESETS_DIRECTORY = "/presets"
     VERSION_V1 = "v1"
     VERSION_V2 = "v2"
     DEFAULT_VERSION = VERSION_V1
     NB_PHYSICAL_BUTTONS = 6
     NB_PAGES = 2
 
-    def __init__(self, banks_directory=None, presets_directory=None):
+    def __init__(
+        self,
+        banks_directory=DEFAULT_BANKS_DIRECTORY,
+        presets_directory=DEFAULT_PRESETS_DIRECTORY,
+    ):
         self.is_loaded = False
         self.load_error = ""
         self.max_bank = 0
@@ -32,8 +37,8 @@ class Bank:
         self.presets = []
         self.presets_name = []
         self.name = None
-        self.banks_directory = banks_directory or self.DEFAULT_BANKS_DIRECTORY
-        self.presets_directory = presets_directory or self.DEFAULT_PRESETS_DIRECTORY
+        self.banks_directory = banks_directory
+        self.presets_directory = presets_directory
         try:
             self.set_banks()
             self.load_bank()

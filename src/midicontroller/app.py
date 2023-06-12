@@ -11,7 +11,8 @@ from midicontroller.controller import (
     START_REPL_COMMAND,
 )
 
-import wifi
+from .wifi import configure_network
+
 
 from midicontroller.webserver import web
 
@@ -28,11 +29,15 @@ async def midicontroller():
         if command == START_WEBSERVER_COMMAND:
             print("Start Web Server")
             midi_controller.splash_screen("Start Web Server", 1)
-            address = wifi.connect_home_wifi()
+            address = configure_network()
+            if address is None:
+                midi_controller.splash_screen("No Wifi", 3)
+                continue
             midi_controller.splash_screen(address, 3)
             event_loop.create_task(webserver())
         elif command == START_REPL_COMMAND:
             print("Start REPL")
+            midi_controller.splash_screen("Start REPL", 3)
             event_loop.create_task(aiorepl.task())
 
 
