@@ -1,0 +1,27 @@
+{
+    "name": "Kryptonite",
+    "version": "v2",
+    "on_load_preset": 0,
+    "presets": [
+        {
+            "type": "preset",
+            "name": "cl-pha"
+        },
+        {
+            "type": "preset",
+            "name": "dist"
+        },
+        {
+            "type": "preset",
+            "name": "solo-r"
+        },
+        {
+            "type": "preset",
+            "name": "clean"
+        },
+        {
+            "type": "preset",
+            "name": "crunch"
+        }
+    ]
+}

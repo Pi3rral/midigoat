@@ -1,0 +1,23 @@
+{
+    "name": "Man In The Box",
+    "version": "v2",
+    "on_load_preset": 0,
+    "presets": [
+        {
+            "type": "preset",
+            "name": "clean"
+        },
+        {
+            "type": "preset",
+            "name": "crunch"
+        },
+        {
+            "type": "preset",
+            "name": "dist"
+        },
+        {
+            "type": "preset",
+            "name": "solo-r"
+        }
+    ]
+}

@@ -5,11 +5,14 @@ from .bank import Bank
 FS3X_TIP_IDX = 7
 FS3X_RING_IDX = 6
 
+NO_COMMAND = 0
+START_WEBSERVER_COMMAND = 1
+START_REPL_COMMAND = 2
+
 
 class Button:
-
-    LONG_PRESS_MS = 700
-    LONG_PRESS_REPEAT_MS = 500
+    LONG_PRESS_MS = 1000
+    LONG_PRESS_REPEAT_MS = 700
 
     INTERNAL_STATE_ON = 1
     INTERNAL_STATE_OFF = 0
@@ -17,6 +20,7 @@ class Button:
     STATE_OFF = 0
     STATE_PRESSED = 1
     STATE_LONG_PRESSED = 2
+    STATE_RELEASED = 3
 
     def __init__(self):
         self.state = self.STATE_OFF
@@ -52,7 +56,6 @@ class Button:
 
 
 class Controller:
-
     bank = None
     lcd = None
     button_values = []
@@ -61,6 +64,9 @@ class Controller:
 
     def __init__(self):
         self.bank = Bank()
+        self.init_buttons()
+
+    def init_buttons(self):
         for _ in range(self.nb_buttons):
             self.button_values.append(0)
             self.buttons.append(Button())
@@ -112,28 +118,36 @@ class Controller:
         self.lcd.clear()
         self.lcd.move_to(0, 0)
         self.lcd.putstr(message)
-        self.wait(seconds)
+        sleep(seconds)
         self.print_menu()
 
     def loop(self):
+        command = NO_COMMAND
         if self.read_buttons():
             if self.buttons[FS3X_TIP_IDX].state == Button.STATE_PRESSED:
                 if self.buttons[FS3X_RING_IDX].state == Button.STATE_PRESSED:
-                    self.bank.swap_page()
-                else:
                     self.bank.bank_up()
+                else:
+                    self.bank.swap_page()
             elif self.buttons[FS3X_RING_IDX].state == Button.STATE_PRESSED:
                 self.bank.bank_down()
             elif self.buttons[0].state == Button.STATE_LONG_PRESSED:
                 self.bank.bank_down()
             elif self.buttons[2].state == Button.STATE_LONG_PRESSED:
                 self.bank.bank_up()
+            elif self.buttons[3].state == Button.STATE_LONG_PRESSED:
+                command = START_REPL_COMMAND
+            elif self.buttons[5].state == Button.STATE_LONG_PRESSED:
+                command = START_WEBSERVER_COMMAND
             else:
                 for i in range(0, 6):
                     if self.buttons[i].state == Button.STATE_PRESSED:
                         self.bank.button_pressed(i)
+                    elif self.buttons[i].state == Button.STATE_LONG_PRESSED:
+                        self.bank.button_long_pressed(i)
             self.wait_bounce()
             self.print_menu()
+        return command
 
     def bank_up(self):
         self.bank.bank_up()

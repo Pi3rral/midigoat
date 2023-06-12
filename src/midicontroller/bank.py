@@ -9,18 +9,24 @@ except:
 import gc
 from .preset import Preset
 
+from .action import Action, BankAction
+
+DEFAULT_BANKS_DIRECTORY = "/banks"
+DEFAULT_PRESETS_DIRECTORY = "/presets"
+
 
 class Bank:
-
-    DEFAULT_BANKS_DIRECTORY = "/banks"
-    DEFAULT_PRESETS_DIRECTORY = "/presets"
     VERSION_V1 = "v1"
     VERSION_V2 = "v2"
     DEFAULT_VERSION = VERSION_V1
     NB_PHYSICAL_BUTTONS = 6
     NB_PAGES = 2
 
-    def __init__(self, banks_directory=None, presets_directory=None):
+    def __init__(
+        self,
+        banks_directory=DEFAULT_BANKS_DIRECTORY,
+        presets_directory=DEFAULT_PRESETS_DIRECTORY,
+    ):
         self.is_loaded = False
         self.load_error = ""
         self.max_bank = 0
@@ -31,10 +37,14 @@ class Bank:
         self.presets = []
         self.presets_name = []
         self.name = None
-        self.banks_directory = banks_directory or self.DEFAULT_BANKS_DIRECTORY
-        self.presets_directory = presets_directory or self.DEFAULT_PRESETS_DIRECTORY
-        self.set_banks()
-        self.load_bank()
+        self.banks_directory = banks_directory
+        self.presets_directory = presets_directory
+        try:
+            self.set_banks()
+            self.load_bank()
+        except Exception as e:
+            pass
+            # self.load_error = str(e)
 
     def set_banks(self):
         self.banks = sorted(uos.listdir(self.banks_directory))
@@ -44,6 +54,8 @@ class Bank:
         self.current_page = (self.current_page + 1) % self.NB_PAGES
 
     def bank_up(self):
+        if not self.is_loaded:
+            return
         self.presets = []
         gc.collect()
         self.current_bank += 1
@@ -52,6 +64,8 @@ class Bank:
         self.load_bank()
 
     def bank_down(self):
+        if not self.is_loaded:
+            return
         self.presets = []
         gc.collect()
         self.current_bank -= 1
@@ -130,38 +144,51 @@ class Bank:
         bank_data["nb_preset"] = len(uos.listdir(bank_dir)) - 1
         return bank_data
 
+    def update_bank(self, bank_number, bank_data):
+        bank_dir = self.banks_directory + "/" + self.banks[bank_number - 1]
+        with open(bank_dir + "/bank.json", "w") as fp:
+            ujson.dump(bank_data, fp)
+        return "Bank {} updated".format(bank_number)
+
     def get_preset_info(self, preset_name):
         with open(self.presets_directory + "/" + preset_name + ".json") as fp:
             preset_data = ujson.load(fp)
         return preset_data
 
-    def load_bank_v1_file(self):
-        bank_file = self.banks_directory + "/bank_" + str(self.current_bank) + ".json"
-        try:
-            with open(bank_file) as fp:
-                bank_data = ujson.load(fp)
-            self.name = bank_data.get("name")
-            self.current_page = 0
-            self.presets = []
-            for preset in bank_data.get("presets"):
-                self.presets.append(Preset(preset.get("name"), preset.get("actions")))
-            for _ in range(len(self.presets), self.NB_PAGES * self.NB_PHYSICAL_BUTTONS):
-                self.presets.append(Preset("NONE", []))
-            self.presets_name = [preset.get_name() for preset in self.presets]
-            self.is_loaded = True
-            self.load_error = ""
-        except Exception as e:
-            self.is_loaded = False
-            self.load_error = e.__class__.__name__
-            print(e)
-        gc.collect()
+    def update_preset(self, preset_name, preset_data):
+        with open(self.presets_directory + "/" + preset_name + ".json") as fp:
+            ujson.dump(preset_data, fp)
+        return "Preset {} updated".format(preset_name)
 
     def button_pressed(self, button_number):
+        if not self.is_loaded:
+            return
         self.presets[
             button_number + (self.current_page * self.NB_PHYSICAL_BUTTONS)
         ].pressed()
+        self.do_bank_action()
+
+    def button_long_pressed(self, button_number):
+        if not self.is_loaded:
+            return
+        self.presets[
+            button_number + (self.current_page * self.NB_PHYSICAL_BUTTONS)
+        ].long_pressed()
+        self.do_bank_action()
+
+    def do_bank_action(self):
+        bank_action = Action.get_bank_action()
+        if bank_action == BankAction.NEXT:
+            self.bank_up()
+        elif bank_action == BankAction.PREVIOUS:
+            self.bank_down()
+        elif bank_action == BankAction.TOGGLE_PAGE:
+            self.swap_page()
+        Action.clear_bank_action()
 
     def get_current_bank_name(self):
+        if not self.is_loaded:
+            return "No Banks Loaded"
         return self.name
 
     def get_current_page(self):

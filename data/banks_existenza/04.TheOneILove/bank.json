@@ -1,0 +1,31 @@
+{
+    "name": "The One I Love",
+    "version": "v2",
+    "on_load_preset": 0,
+    "presets": [
+        {
+            "type": "preset",
+            "name": "clean"
+        },
+        {
+            "type": "preset",
+            "name": "plumes"
+        },
+        {
+            "type": "preset",
+            "name": "cl-pha"
+        },
+        {
+            "type": "preset",
+            "name": "dist"
+        },
+        {
+            "type": "preset",
+            "name": "crunch"
+        },
+        {
+            "type": "preset",
+            "name": "solo-r"
+        }
+    ]
+}

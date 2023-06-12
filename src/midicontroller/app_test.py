@@ -3,7 +3,7 @@ try:
 except ImportError:
     import asyncio
 
-import wifi
+import midicontroller.wifi as wifi
 from midicontroller.controller_test import midi_controller_test as midi_controller
 
 

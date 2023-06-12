@@ -1,0 +1,31 @@
+{
+    "name": "Warning",
+    "version": "v2",
+    "on_load_preset": 0,
+    "presets": [
+        {
+            "type": "preset",
+            "name": "clean"
+        },
+        {
+            "type": "preset",
+            "name": "crunch"
+        },
+        {
+            "type": "preset",
+            "name": "plumes-trem"
+        },
+        {
+            "type": "preset",
+            "name": "plumes"
+        },
+        {
+            "type": "preset",
+            "name": "dist"
+        },
+        {
+            "type": "preset",
+            "name": "solo-r"
+        }
+    ]
+}

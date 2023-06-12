@@ -1,0 +1,19 @@
+{
+    "name": "In The End",
+    "version": "v2",
+    "on_load_preset": 0,
+    "presets": [
+        {
+            "type": "preset",
+            "name": "clean"
+        },
+        {
+            "type": "preset",
+            "name": "crunch"
+        },
+        {
+            "type": "preset",
+            "name": "dist"
+        }
+    ]
+}

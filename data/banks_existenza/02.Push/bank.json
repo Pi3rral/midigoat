@@ -1,0 +1,31 @@
+{
+    "name": "21st Century",
+    "version": "v2",
+    "on_load_preset": 0,
+    "presets": [
+        {
+            "type": "preset",
+            "name": "clean"
+        },
+        {
+            "type": "preset",
+            "name": "crunch"
+        },
+        {
+            "type": "preset",
+            "name": "solo-r"
+        },
+        {
+            "type": "preset",
+            "name": "crunch"
+        },
+        {
+            "type": "preset",
+            "name": "sovrgn"
+        },
+        {
+            "type": "preset",
+            "name": "dist"
+        }
+    ]
+}

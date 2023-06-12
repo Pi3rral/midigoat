@@ -9,7 +9,7 @@ from resource import getrusage, RUSAGE_SELF
 import psutil
 from .controller import Controller
 from .bank import Bank
-from .lcd.lcd_api import LcdApi
+from lcd.lcd_api import LcdApi
 from .midi import MidiPort
 
 

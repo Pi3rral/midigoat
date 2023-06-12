@@ -1,0 +1,5 @@
+{
+    "banks_directory": "/banks",
+    "presets_directory": "/presets",
+    "lcd_address": 63
+}

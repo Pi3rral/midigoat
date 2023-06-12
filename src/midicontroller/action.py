@@ -1,10 +1,17 @@
-from .midi.adafruit_midi.program_change import ProgramChange
-from .midi.adafruit_midi.control_change import ControlChange
+from adafruit_midi.program_change import ProgramChange
+from adafruit_midi.control_change import ControlChange
 from .midi import MidiPort
 
 
 class ActionType:
     MIDI = "midi"
+    BANK = "bank"
+
+
+class BankAction:
+    NEXT = "next"
+    PREVIOUS = "previous"
+    TOGGLE_PAGE = "toggle_page"
 
 
 class MIDIMessage:
@@ -13,17 +20,33 @@ class MIDIMessage:
 
 
 class Action:
-
     type = None
     parameters = {}
+
+    bank_action = None
+
+    @classmethod
+    def set_bank_action(cls, bank_action):
+        cls.bank_action = bank_action
+
+    @classmethod
+    def clear_bank_action(cls):
+        cls.bank_action = None
+
+    @classmethod
+    def get_bank_action(cls):
+        return cls.bank_action
 
     def __init__(self, type, parameters):
         self.type = type
         self.parameters = parameters
 
     def do_action(self):
+        self.clear_bank_action()
         if self.type == ActionType.MIDI:
             self.do_midi_action()
+        elif self.type == ActionType.BANK:
+            self.set_bank_action(self.parameters["bank_action"])
 
     def do_midi_action(self):
         # remove 1 to the channel to be compliant with everything else

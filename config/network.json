@@ -1,0 +1,12 @@
+{
+    "known_networks": [
+        {
+            "ssid": "WiGoat",
+            "password": "GoatFather"
+        }
+    ],
+    "midigoat_network": {
+        "ssid": "midigoat",
+        "password": "GoatFather"
+    }
+}

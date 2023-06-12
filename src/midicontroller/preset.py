@@ -21,3 +21,6 @@ class Preset:
     def pressed(self):
         for action in self.actions:
             action.do_action()
+
+    def long_pressed(self):
+        pass

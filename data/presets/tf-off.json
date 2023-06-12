@@ -1,0 +1,16 @@
+{
+    "comment": "Terraform Off",
+    "name": "TF-OFF",
+    "actions": [
+        {
+            "position": 0,
+            "comment": "Terraform Off",
+            "type": "midi",
+            "parameters": {
+                "type": "program_change",
+                "channel": "1",
+                "patch": "9"
+            }
+        }
+    ]
+}
