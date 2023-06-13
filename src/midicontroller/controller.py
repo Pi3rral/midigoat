@@ -128,9 +128,9 @@ class Controller:
                 if self.buttons[FS3X_RING_IDX].state == Button.STATE_PRESSED:
                     self.bank.bank_up()
                 else:
-                    self.bank.swap_page()
+                    self.bank.bank_down()
             elif self.buttons[FS3X_RING_IDX].state == Button.STATE_PRESSED:
-                self.bank.bank_down()
+                self.bank.swap_page()
             elif self.buttons[0].state == Button.STATE_LONG_PRESSED:
                 self.bank.bank_down()
             elif self.buttons[2].state == Button.STATE_LONG_PRESSED:

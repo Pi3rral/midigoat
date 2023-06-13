@@ -166,6 +166,7 @@ Long press open a setup menu:
 - Implement OTA firmware update: 
     - https://docs.micropython.org/en/latest/library/esp32.html
     - https://github.com/orgs/micropython/discussions/9579
+    - https://iot49.org/projects/internet/ota.html
 - Freeze static files:
     - https://github.com/peterhinch/micropython_data_to_py
     - https://github.com/insighio/microfreezer
