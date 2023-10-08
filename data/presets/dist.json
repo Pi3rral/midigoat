@@ -72,7 +72,7 @@
             "parameters": {
                 "type": "program_change",
                 "channel": "2",
-                "patch": "1"
+                "patch": "3"
             }
         }
     ]

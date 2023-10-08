@@ -1,5 +1,5 @@
 {
-    "name": "Generic",
+    "name": "Generic 2",
     "version": "v2",
     "on_load_preset": 0,
     "presets": [
@@ -25,7 +25,7 @@
         },
         {
             "type": "preset",
-            "name": "solo-r"
+            "name": "solo-dist"
         },
         {
             "type": "preset",

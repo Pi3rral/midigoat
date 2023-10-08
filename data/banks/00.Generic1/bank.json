@@ -1,0 +1,55 @@
+{
+    "name": "Generic 1",
+    "version": "v2",
+    "on_load_preset": 0,
+    "presets": [
+        {
+            "type": "preset",
+            "name": "clean"
+        },
+        {
+            "type": "preset",
+            "name": "crunch"
+        },
+        {
+            "type": "preset",
+            "name": "dist"
+        },
+        {
+            "type": "preset",
+            "name": "toggle"
+        },
+        {
+            "type": "preset",
+            "name": "solo-crunch"
+        },
+        {
+            "type": "preset",
+            "name": "solo-dist"
+        },
+        {
+            "type": "preset",
+            "name": "phasr"
+        },
+        {
+            "type": "preset",
+            "name": "chrus"
+        },
+        {
+            "type": "preset",
+            "name": "trem"
+        },
+        {
+            "type": "preset",
+            "name": "toggle"
+        },
+        {
+            "type": "preset",
+            "name": "tf-off"
+        },
+        {
+            "type": "preset",
+            "name": "delay"
+        }
+    ]
+}

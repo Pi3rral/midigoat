@@ -1,17 +1,16 @@
 {
-    "position": 3,
-    "comment": "Plumes + Reverb",
-    "name": "Plumes",
+    "name": "SoloDI",
+    "comment": "Revolt Channel C + EQ Solo",
     "actions": [
         {
             "position": 0,
-            "comment": "Plumes On",
+            "comment": "Plumes Off",
             "type": "midi",
             "parameters": {
                 "type": "control_change",
                 "channel": "6",
                 "control": "10",
-                "value": "1"
+                "value": "0"
             }
         },
         {
@@ -27,11 +26,32 @@
         },
         {
             "position": 0,
+            "comment": "Revolt Channel C",
+            "type": "midi",
+            "parameters": {
+                "type": "program_change",
+                "channel": "10",
+                "patch": "4"
+            }
+        },
+        {
+            "position": 0,
             "comment": "Muff Off",
             "type": "midi",
             "parameters": {
                 "type": "control_change",
                 "channel": "7",
+                "control": "10",
+                "value": "0"
+            }
+        },
+        {
+            "position": 0,
+            "comment": "Sovereign Off",
+            "type": "midi",
+            "parameters": {
+                "type": "control_change",
+                "channel": "8",
                 "control": "10",
                 "value": "0"
             }
@@ -58,12 +78,12 @@
         },
         {
             "position": 0,
-            "comment": "EQ Gen",
+            "comment": "EQ Solo",
             "type": "midi",
             "parameters": {
                 "type": "program_change",
                 "channel": "2",
-                "patch": "1"
+                "patch": "7"
             }
         }
     ]
