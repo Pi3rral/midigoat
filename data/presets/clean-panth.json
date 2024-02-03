@@ -1,6 +1,6 @@
 {
     "name": "Clean",
-    "comment": "Clean + Reverb",
+    "comment": "Clean + Pantheon + Reverb",
     "actions": [
         {
             "position": 0,
@@ -15,13 +15,13 @@
         },
         {
             "position": 0,
-            "comment": "Pantheon Off",
+            "comment": "Pantheon On",
             "type": "midi",
             "parameters": {
                 "type": "control_change",
                 "channel": "5",
                 "control": "10",
-                "value": "0"
+                "value": "1"
             }
         },
         {

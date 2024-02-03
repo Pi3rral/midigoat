@@ -1,6 +1,6 @@
 {
-    "name": "Clean",
-    "comment": "Clean + Reverb",
+    "name": "SoloDU",
+    "comment": "Revolt Channel C + EQ Solo + Univibe",
     "actions": [
         {
             "position": 0,
@@ -26,12 +26,12 @@
         },
         {
             "position": 0,
-            "comment": "Revolt Channel A",
+            "comment": "Revolt Channel C",
             "type": "midi",
             "parameters": {
                 "type": "program_change",
                 "channel": "10",
-                "patch": "0"
+                "patch": "4"
             }
         },
         {
@@ -41,6 +41,17 @@
             "parameters": {
                 "type": "control_change",
                 "channel": "7",
+                "control": "10",
+                "value": "0"
+            }
+        },
+        {
+            "position": 0,
+            "comment": "Sovereign Off",
+            "type": "midi",
+            "parameters": {
+                "type": "control_change",
+                "channel": "8",
                 "control": "10",
                 "value": "0"
             }
@@ -57,22 +68,22 @@
         },
         {
             "position": 0,
-            "comment": "Terraform Off",
+            "comment": "Terraform Univibe",
             "type": "midi",
             "parameters": {
                 "type": "program_change",
                 "channel": "1",
-                "patch": "9"
+                "patch": "3"
             }
         },
         {
             "position": 0,
-            "comment": "EQ Clean",
+            "comment": "EQ Solo",
             "type": "midi",
             "parameters": {
                 "type": "program_change",
                 "channel": "2",
-                "patch": "1"
+                "patch": "7"
             }
         }
     ]
