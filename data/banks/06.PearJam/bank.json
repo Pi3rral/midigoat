@@ -1,7 +1,6 @@
 {
-    "name": "Generic 1",
+    "name": "Pearl Jam",
     "version": "v2",
-    "on_load_preset": 0,
     "presets": [
         {
             "type": "preset",
@@ -21,7 +20,7 @@
         },
         {
             "type": "preset",
-            "name": "solo-crunch"
+            "name": "solo-dist-univ"
         },
         {
             "type": "preset",

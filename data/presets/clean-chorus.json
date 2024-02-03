@@ -1,6 +1,6 @@
 {
-    "comment": "Plumes + Reverb",
-    "name": "PluTrm",
+    "name": "ChrsCL",
+    "comment": "Clean + Chorus + Reverb",
     "actions": [
         {
             "position": 0,
@@ -15,13 +15,13 @@
         },
         {
             "position": 0,
-            "comment": "Plumes On",
+            "comment": "Plumes Off",
             "type": "midi",
             "parameters": {
                 "type": "control_change",
                 "channel": "6",
                 "control": "10",
-                "value": "1"
+                "value": "0"
             }
         },
         {
@@ -58,17 +58,6 @@
         },
         {
             "position": 0,
-            "comment": "Sovereign Off",
-            "type": "midi",
-            "parameters": {
-                "type": "control_change",
-                "channel": "8",
-                "control": "10",
-                "value": "0"
-            }
-        },
-        {
-            "position": 0,
             "comment": "Reverb",
             "type": "midi",
             "parameters": {
@@ -79,17 +68,17 @@
         },
         {
             "position": 0,
-            "comment": "Terraform Tremolo",
+            "comment": "Terraform Chorus",
             "type": "midi",
             "parameters": {
                 "type": "program_change",
                 "channel": "1",
-                "patch": "6"
+                "patch": "5"
             }
         },
         {
             "position": 0,
-            "comment": "EQ Gen",
+            "comment": "EQ Clean",
             "type": "midi",
             "parameters": {
                 "type": "program_change",

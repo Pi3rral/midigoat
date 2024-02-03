@@ -1,7 +1,6 @@
 {
     "name": "Today",
     "version": "v2",
-    "on_load_preset": 0,
     "presets": [
         {
             "type": "preset",
