@@ -9,6 +9,15 @@ https://www.digikey.ca/en/maker/projects/micropython-basics-load-files-run-code/
 
 ### Local Virtualenv
 
+#### Poetry
+
+(`--no-root` do not install the source code, but only the dependencies)
+```
+poetry install --no-root
+```
+
+#### PyEnv Virtualenv (Deprecated)
+
 Using pyenv-virtualenv `micropython`: `pyenv virtualenv activate micropython`
 
 ```shell

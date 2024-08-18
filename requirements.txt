@@ -1,3 +1,0 @@
-esptool
-adafruit-ampy
-rshell
